@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}DMD Panel Administratora - Zarządzanie Aplikacją{% endblock %}
+
+{% block addButton %}{% endblock %}
+{% block navbarTitle %}<a class="nav-link active dark-mode " aria-current="page" href="#">Zarządzanie Aplikacją</a>{% endblock %}
+
+
+{% block tableContent%}
+<div class="jasne rogi formatyj-maly-wiersz">
+    <div class="tylko-klej">
+        <div class="rogi colapse-column-usual formatuj-left">
+            <div class="formatuj-left">
+                <h5>Ustawienia Domeny Obrazów:</h5>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" value="{{domain}}" class="formatuj-inputs-setting form-control" id="floatingInput" placeholder="https://example.com">
+                <label for="floatingInput">Domena główna</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" value="{{blog}}" class="formatuj-inputs-setting form-control" id="floatingInput" placeholder="example.com">
+                <label for="floatingInput">Ścieżka do blog obrazki</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" value="{{avatar}}" class="formatuj-inputs-setting form-control" id="floatingInput" placeholder="example.com">
+                <label for="floatingInput">Ścieżka do avatar</label>
+            </div>
+            
+        </div>
+        <div class="colapse-column-usual formatuj-left">
+            <div class="formatuj-left">
+                <h5>Ustawienia Stronicowania:</h5>
+            </div>
+            <div class="form-floating mb-3 formatuj-left">
+                <input 
+                    style="width: 150px !important;" 
+                    type="text"value="{{onPages}}" 
+                    class="formatuj-inputs-setting form-control" 
+                    id="floatingInput" 
+                    placeholder="example.com">
+
+                <label for="floatingInput">Ilość elementów na stonie:</label>
+            </div>
+            
+            <div>
+                <form action="">
+                    <div class="formatuj-left formatuj-margin">
+                        <input type="submit" class="btn btn-success btn-sm" value="Zapisz Ustawienia"/>
+                    </div>
+                    <div class="formatuj-left formatuj-margin">                    
+                        <input type="submit" class="btn btn-danger btn-sm" value="Restaruj Aplikację"/>
+                        <p class="jasny formatuj-padding" style="margin-top: 25px; max-width: 150px; color: #beddff">Ostatni restart aplikacji: {{restart}}</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="colapse-column-usual formatuj-left">
+            <div class="formatuj-left">
+                <h5>Ustawienia Adresu Admina:</h5>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text formatuj-inputs" id="inputGroup-sizing-sm"><i class="bi bi-envelope-at-fill"></i></span>
+                <input type="text" class="form-control formatuj-inputs" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Adres E-mail" value="{{smtpAdmin['smtp_username']}}" required>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text formatuj-inputs" id="inputGroup-sizing-sm"><i class="bi bi-hdd-network"></i></span>
+                <input type="text" class="form-control formatuj-inputs" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Serwer SMTP" value="{{smtpAdmin['smtp_server']}}" required>
+                <input type="text" class="form-control formatuj-inputs" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Port" value="{{smtpAdmin['smtp_port']}}" required>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text formatuj-inputs" id="inputGroup-sizing-sm"><i class="bi bi-file-earmark-lock2"></i></span>
+                <input type="password" class="form-control formatuj-inputs" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Hasło do E-maila" required>
+            </div>
+            
+        </div>
+        <div class="colapse-column-usual formatuj-left">
+            <div class="formatuj-left">
+                <h5>Ustawienia witryn:</h5>
+                <div class="form-floating mb-3">
+                    <input type="text" value="{{domy}}" class="formatuj-inputs-setting form-control" id="floatingInput" placeholder="example.com">
+                    <label for="floatingInput">Witryna DMD Domy</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" value="{{budownictwo}}" class="formatuj-inputs-setting form-control" id="floatingInput" placeholder="example.com">
+                    <label for="floatingInput">Witryna DMD Budownictwo</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" value="{{development}}" class="formatuj-inputs-setting form-control" id="floatingInput" placeholder="example.com">
+                    <label for="floatingInput">Witryna DMD Development</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" value="{{elitehome}}" class="formatuj-inputs-setting form-control" id="floatingInput" placeholder="example.com">
+                    <label for="floatingInput">Witryna DMD EliteHome</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" value="{{inwestycje}}" class="formatuj-inputs-setting form-control" id="floatingInput" placeholder="example.com">
+                    <label for="floatingInput">Witryna DMD Inwestycje</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" value="{{instalacje}}" class="formatuj-inputs-setting form-control" id="floatingInput" placeholder="example.com">
+                    <label for="floatingInput">Ścieżka do Instalacje</label>
+                </div>
+            </div>                                          
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block footer %}
+ To jest stopka panelu administracyjnego. All right reserved &copy; 2024 by DMD Panel Administratora.<br/>
+{% endblock %}

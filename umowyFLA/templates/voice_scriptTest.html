@@ -1,0 +1,108 @@
+<button id="startButton">Start Recording</button>
+<button id="stopButton" disabled>Stop Recording</button>
+<audio id="audioElement" controls></audio>
+
+<script>
+    const startButton = document.getElementById('startButton');
+    const stopButton = document.getElementById('stopButton');
+    const audioElement = document.getElementById('audioElement');
+    let recognition;
+
+    startButton.addEventListener('click', () => {
+        recognition = new webkitSpeechRecognition(); // Inicjalizacja obiektu rozpoznawania mowy
+        recognition.start(); // Rozpoczęcie rozpoznawania mowy po kliknięciu przycisku
+
+        recognition.onresult = (event) => {
+            let speechToText = '';
+            for (let i = 0; i < event.results.length; i++) {
+                speechToText += event.results[i][0].transcript; // Pobranie przetworzonego tekstu mowy
+            }
+            sendDataToServer(speechToText); // Przesłanie tekstu do serwera
+        };
+
+        stopButton.disabled = false; // Aktywacja przycisku "Stop Recording"
+        startButton.disabled = true; // Dezaktywacja przycisku "Start Recording"
+    });
+
+    stopButton.addEventListener('click', () => {
+        recognition.stop(); // Zatrzymanie rozpoznawania mowy po kliknięciu przycisku
+        stopButton.disabled = true; // Dezaktywacja przycisku "Stop Recording"
+        startButton.disabled = false; // Aktywacja przycisku "Start Recording"
+    });
+
+    function sendDataToServer(data) {
+        fetch('/voice', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ text: data }) // Przesłanie przetworzonego tekstu do serwera w formie JSON
+        })
+        .then(response => {
+            // Obsługa odpowiedzi od serwera
+            console.log(response);
+        })
+        .catch(error => {
+            // Obsługa błędów
+            console.error('Error:', error);
+        });
+    }
+
+    const startButtonRecording = document.getElementById('startButtonRecording');
+    const stopButtonRecording = document.getElementById('stopButtonRecording');
+    const audioElementRecording = document.getElementById('audioElementRecording');
+
+    let mediaRecorder;
+    let chunks = [];
+
+    startButtonRecording.addEventListener('click', startRecording);
+    stopButtonRecording.addEventListener('click', stopRecording);
+
+    async function startRecording() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.ondataavailable = function (event) {
+                chunks.push(event.data);
+            }
+            mediaRecorder.onstop = function () {
+                const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
+                const audioUrl = URL.createObjectURL(blob);
+                audioElementRecording.src = audioUrl;
+                sendDataToServer(blob); // Dodaj przesłanie nagrania do serwera
+            }
+            mediaRecorder.start();
+            startButtonRecording.disabled = true;
+            stopButtonRecording.disabled = false;
+        } catch (error) {
+            console.error('Error accessing microphone:', error);
+        }
+    }
+
+    function stopRecording() {
+        mediaRecorder.stop();
+        startButtonRecording.disabled = false;
+        stopButtonRecording.disabled = true;
+    }
+
+    function sendDataToServer(data) {
+        const formData = new FormData(); // Utwórz nowy obiekt FormData
+
+        // Dodaj plik dźwiękowy do obiektu FormData
+        formData.append('audioFile', data, 'recording.ogg');
+
+        fetch('/voice', {
+            method: 'POST',
+            body: formData // Przesłanie obiektu FormData jako ciało żądania
+        })
+        .then(response => {
+            // Obsługa odpowiedzi od serwera
+            console.log(response);
+        })
+        .catch(error => {
+            // Obsługa błędów
+            console.error('Error:', error);
+        });
+    }
+
+</script>

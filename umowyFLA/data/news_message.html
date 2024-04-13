@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+    <html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <title>{{tytuł}}</title>
+        <style>
+            /* Dodaj stylizację, dostosowaną do Twoich potrzeb */
+            body {
+                font-family: 'Arial', sans-serif;
+                line-height: 1.6;
+                background-color: whitesmoke;
+            }
+
+            li {
+                font-family: 'YourCustomFont', sans-serif; /* Dodaj niestandardową czcionkę */
+                color: #4a4b4c; /* Zastosuj niestandardowy kolor tekstu */
+                text-shadow: 2px 2px 4px rgba(60, 59, 59, 0.3); /* Dodaj cień do tekstu */
+                transition: color 0.3s ease-in-out; /* Dodaj płynną zmianę koloru */
+            }
+
+            h1 {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: bold;
+            }
+
+            li:hover {
+                color: #22810b; /* Zmiana koloru na najechanie myszką */
+            }
+            .centered-div {
+                text-align: center;
+                padding: 20px;
+                background-color: #58506b;
+            }
+            .centered-div img {
+                font-size: 50px;
+                font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                color: aliceblue;
+                width: 50%;
+                margin-bottom: 10px; 
+                max-width: 400px;
+                max-height: 300px;
+            }
+            .centered-div p {
+                margin-top: 10px;
+                font-size: 50px;
+                font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                color: aliceblue;
+            }
+
+            .category {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 15px;
+                color: grey;
+            }
+
+            .wellcome {
+                font-size: 15px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-style: italic;
+            }
+
+            .highlights {
+                background-color: white;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-style: italic;
+                padding: 20px;
+                border-left: solid 4px;
+            }
+            .photos {
+                text-align: center;
+                padding: 20px;
+            }
+
+            .photos img {
+                width: 100%;
+            }
+
+            .tags {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-size: 12px;
+                padding: 5px;
+            }
+
+            .footer {
+                margin-top: 25px;
+                padding: 20px;
+                background-color: #58506b;
+                font-size: 14px;
+                font-family: Arial, Helvetica, sans-serif;
+                color: aliceblue;
+            }
+
+            .footer a {
+                color: aliceblue;
+                text-decoration: none;
+            }
+
+            .footer img {
+                padding-bottom: 5px;
+                max-width: 200px;
+                max-height: 100px;
+            }
+
+            .display-4 {
+                font-size: 1.5rem;
+                color: white; 
+            }
+        </style>
+    </head>
+    <body>
+        <div class="centered-div">
+            <img src="https://dmddomy.pl/images/images/logo_dmd_apl.png" alt="DMD" />
+            <p>Newsletter</p>
+        </div>
+        <div class="wellcome">
+            <p>Cześć, {{imie klienta}}.</p>
+            <p>Mamy dla Ciebie gorące wieści z pierwszej ręki!</p>
+        </div>
+        <h1>{{tytuł}}</h1>
+        <div class="category">
+            <p>Kategoria: {{kategoria}}</p>
+        </div>
+
+        
+        <!-- Główne zdjęcie -->
+        <div class="photos">
+            <img src="https://dmddomy.pl/{{zdjecie glowne}}" alt=". . .">
+        </div>
+        <!-- Główna treść -->
+        <div class="wellcome">
+            <p>{{tresc glowna}}</p>
+        </div>
+        <div class="highlights">
+            <p>“ {{wprowadzenie}} “</p>
+        </div>
+
+        <!-- Wypunktowania -->
+        <ul>
+            {{wypunktowania}}
+        </ul>
+
+        
+        <!-- Dodatkowe zdjęcie -->
+        <div class="photos">
+            <img src="https://dmddomy.pl/{{zdjecie dodatkowe}}" alt=". . .">
+        </div>
+        <!-- Tagi i kategoria -->
+        <div class="tags">
+            <strong>Tagi:</strong>
+            {{tagi}}
+        </div>
+        
+
+        <!-- Stopka -->
+        <footer class="footer">
+            <img src="https://dmddomy.pl/images/images/logo_dmd_apl.png" alt="DMD" />
+            <p>© 2024 DMD Newsletter. Wszelkie prawa zastrzeżone.</p>
+            <a href="https://dmddomy.pl" target="_blank">www.dmddomy.pl</a> 
+            <!-- | 
+            <a href="http://dmdbudownictwo.pl" target="_blank">www.dmdbudownictwo.pl</a> | 
+            <a href="http://dmdelitehome.pl" target="_blank">www.dmdelitehome.pl</a> | 
+            <a href="http://dmdinvestment.pl" target="_blank">www.dmdinvestment.pl</a> -->
+            <p>
+                <a href="https://dmddomy.pl/edytuj-newslettera/{{hashes}}" target="_blank"><i class="bi bi-person-lines-fill"></i>&nbsp; &nbsp; &nbsp;Edytuj profil subskrybenta DMD.</a><br/>
+                <a href="https://dmddomy.pl/usun-newslettera/{{hashes}}" target="_blank"><i class="bi bi-trash3"></i>&nbsp; &nbsp; &nbsp;Usuń z newslettera DMD.</a>
+            </p>
+            <p>Obserwuj nas na:</p>
+            <p>
+                <a href="https://www.facebook.com/dmddomy/" target="_blank"><i class="bi bi-facebook display-4"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="https://www.youtube.com/channel/UCBRN-SPMEIYK6YRV23Komxw" target="_blank"><i class="bi bi-youtube display-4"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="https://www.instagram.com/dmddomy/" target="_blank"><i class="bi bi-instagram display-4"></i></a>
+            </p>
+            
+        </footer>
+        
+    </body>
+    </html>

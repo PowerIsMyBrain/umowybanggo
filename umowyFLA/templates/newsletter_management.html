@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{% block title %}DMD Panel Administratora - Zarządzanie Newsletterem{% endblock %}
+
+{% block addButton %}{% endblock %}
+{% block navbarTitle %}<a class="nav-link active dark-mode " aria-current="page" href="#">Zarządzanie Newsletterem</a>{% endblock %}
+
+{% block tableContent%}
+<div class="jasne rogi formatyj-maly-wiersz">
+    <div class="tylko-klej">
+        <div class="rogi colapse-column-usual formatuj-left">
+            <div class="formatuj-left">
+                <h5>Ustawienia Planu Newslettera:</h5>
+            </div>
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    {% if newsletterPlan == 1440 %}
+                        <button class="accordion-button collapsed bg-dark formatuj-inputs active-color-bg" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    {% else %}
+                        <button class="accordion-button collapsed bg-dark formatuj-inputs" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    {% endif %}
+                      Codziennie
+                    </button>
+                  </h2>
+                  <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body bg-dark">
+                        <div>
+                            <form action="">
+                                <p>Codzienna wysyłka newslettera - ciekawe rozwiązanie dla agresywnego marketingu.</p>
+                                <div class="formatuj-right">
+                                    {% if newsletterPlan == 1440 %}
+                                        <input type="submit" class="btn btn-secondary btn-sm" value="Aktywny plan" disabled/>
+                                    {% else %}
+                                        <input type="submit" class="btn btn-success btn-sm" value="Ustaw plan"/>
+                                    {% endif %}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    {% if newsletterPlan == 3600 %}
+                        <button class="accordion-button collapsed bg-dark formatuj-inputs active-color-bg" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    {% else %}
+                        <button class="accordion-button collapsed bg-dark formatuj-inputs" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    {% endif %}
+                        Dwa razy w tygodniu
+                    </button>
+                  </h2>
+                  <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body bg-dark">
+                        <div>
+                            <form action="">
+                                <p>Wysyłka newslettera dwa razy w tygodniu - idealne rozwiązanie dla regularnej komunikacji z odbiorcami.</p>
+                                <div class="formatuj-right">
+                                    {% if newsletterPlan == 3600 %}
+                                        <input type="submit" class="btn btn-secondary btn-sm" value="Aktywny plan" disabled/>
+                                    {% else %}
+                                        <input type="submit" class="btn btn-success btn-sm" value="Ustaw plan"/>
+                                    {% endif %}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    {% if newsletterPlan == 10080 %}
+                        <button class="accordion-button collapsed bg-dark formatuj-inputs active-color-bg" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    {% else %}
+                        <button class="accordion-button collapsed bg-dark formatuj-inputs" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    {% endif %}
+                        Raz w tygodniu
+                    </button>
+                  </h2>
+                  <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body bg-dark">
+                        <div>
+                            <form action="">
+                                <p>Wysyłka newslettera raz w tygodniu - świetny sposób na utrzymanie regularnego kontaktu z odbiorcami.</p>
+                                <div class="formatuj-right">
+                                    {% if newsletterPlan == 10080 %}
+                                        <input type="submit" class="btn btn-secondary btn-sm" value="Aktywny plan" disabled/>
+                                    {% else %}
+                                        <input type="submit" class="btn btn-success btn-sm" value="Ustaw plan"/>
+                                    {% endif %}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Możesz dodawać więcej harmonogramów tutaj -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        {% if newsletterPlan == 40320 %}
+                            <button class="accordion-button collapsed bg-dark formatuj-inputs active-color-bg" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                        {% else %}
+                            <button class="accordion-button collapsed bg-dark formatuj-inputs" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                        {% endif %}
+                            Co miesiąc
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body bg-dark">
+                            <div>
+                                <form action="">
+                                    <p>Wysyłka newslettera raz w miesiącu - doskonała forma regularnych aktualizacji, zapowiedzi wydarzeń oraz podsumowań minionego miesiąca. To także sposób na utrzymanie kontaktu z odbiorcami bez nadmiernego przesyłania wiadomości.</p>
+                                    <div class="formatuj-right">
+                                        {% if newsletterPlan == 40320 %}
+                                        <input type="submit" class="btn btn-secondary btn-sm" value="Aktywny plan" disabled/>
+                                    {% else %}
+                                        <input type="submit" class="btn btn-success btn-sm" value="Ustaw plan"/>
+                                    {% endif %}
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        {% if newsletterPlan == 100800 %}
+                            <button class="accordion-button collapsed bg-dark formatuj-inputs active-color-bg" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                        {% else %}
+                            <button class="accordion-button collapsed bg-dark formatuj-inputs" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                        {% endif %}
+                            Co kwartał
+                        </button>
+                    </h2>
+                    <div id="flush-collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body bg-dark">
+                            <div>
+                                <form action="">
+                                    <p>Wysyłka newslettera co kwartał - idealne rozwiązanie dla podsumowania działalności firmy, raportowania kluczowych wyników i prezentowania przyszłych planów na kolejne kwartały. Wysyłka tak rzadka zapewnia, że informacje są starannie wyselekcjonowane i istotne dla odbiorców.</p>
+                                    <div class="formatuj-right">
+                                        {% if newsletterPlan == 100800 %}
+                                            <input type="submit" class="btn btn-secondary btn-sm" value="Aktywny plan" disabled/>
+                                        {% else %}
+                                            <input type="submit" class="btn btn-success btn-sm" value="Ustaw plan"/>
+                                        {% endif %}
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="colapse-column-usual formatuj-left">
+            <div class="formatuj-left">
+                <h5>Ustawienia Adresu Newslettera:</h5>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text formatuj-inputs" id="inputGroup-sizing-sm"><i class="bi bi-envelope-at-fill"></i></span>
+                <input type="text" class="form-control formatuj-inputs" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Adres E-mail" value="{{smtpSettingsDict['smtp_username']}}" required>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text formatuj-inputs" id="inputGroup-sizing-sm"><i class="bi bi-hdd-network"></i></span>
+                <input type="text" class="form-control formatuj-inputs" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Serwer SMTP" value="{{smtpSettingsDict['smtp_server']}}" required>
+                <input type="text" class="form-control formatuj-inputs" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Port" value="{{smtpSettingsDict['smtp_port']}}" required>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text formatuj-inputs" id="inputGroup-sizing-sm"><i class="bi bi-file-earmark-lock2"></i></span>
+                <input type="password" class="form-control formatuj-inputs" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Hasło do E-maila" required>
+            </div>
+            <div>
+                <form action="">
+                    <div class="formatuj-right">
+                        <input type="submit" class="btn btn-success btn-sm" value="Zapisz Nadawcę Newslettera"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="colapse-column-ender formatuj-left">
+            <div class="formatuj-left">
+                <h5>Ostation Dodani Subskrybenci</h5>
+                <div class="list-group">
+                    {% for sub in sortedListSubs %}
+                        <a href="mailto:{{sub[2]}}" class="formatuj-list list-group-item list-group-item-action"><i class="bi bi-person-circle"></i><span style="color: #d5b650"><strong> {{sub[1]}} </strong></span><i class="bi bi-caret-right-fill"></i> {{sub[2]}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+ To jest stopka panelu administracyjnego. All right reserved &copy; 2024 by DMD Panel Administratora.<br/>
+{% endblock %}

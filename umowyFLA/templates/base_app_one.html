@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Recorder</title>
+    <link rel="stylesheet" href="static/app_one/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Audio Recorder</h1>
+        <div class="controls">
+            <button id="startButton">Start Recording</button>
+            <button id="stopButton" disabled>Stop Recording</button>
+            <button id="sendButton">Send Recording</button> <!-- Dodany przycisk "Wyślij nagranie" -->
+        </div>
+        <p id="result"></p>
+
+        <audio id="audioElement" controls></audio>
+    </div>
+    <script src="static/app_one/js/script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const startButton = document.getElementById('startButton');
+            const stopButton = document.getElementById('stopButton');
+            const sendButton = document.getElementById('sendButton'); // Dodany przycisk "Wyślij nagranie"
+            const audioElement = document.getElementById('audioElement');
+            let mediaRecorder;
+            let chunks = [];
+
+            startButton.addEventListener('click', startRecording);
+            stopButton.addEventListener('click', stopRecording);
+            sendButton.addEventListener('click', sendRecording); // Dodana obsługa kliknięcia przycisku "Wyślij nagranie"
+
+            async function startRecording() {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.ondataavailable = function (event) {
+                        chunks.push(event.data);
+                    }
+                    mediaRecorder.onstop = function () {
+                        const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
+                        const audioUrl = URL.createObjectURL(blob);
+                        audioElement.src = audioUrl;
+                    }
+                    mediaRecorder.start();
+                    startButton.disabled = true;
+                    stopButton.disabled = false;
+                    sendButton.disabled = true; // Wyłączamy przycisk "Wyślij nagranie" podczas nagrywania
+                } catch (error) {
+                    console.error('Error accessing microphone:', error);
+                }
+            }
+
+            function stopRecording() {
+                mediaRecorder.stop();
+                startButton.disabled = false;
+                stopButton.disabled = true;
+                sendButton.disabled = false; // Po zakończeniu nagrywania aktywujemy ponownie przycisk "Wyślij nagranie"
+            }
+
+            function sendRecording() {
+                if (chunks.length === 0) {
+                    console.error('No recording available to send.');
+                    return;
+                }
+
+                const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
+                const formData = new FormData();
+                formData.append('audio_data', blob);
+
+                fetch('/send_recording', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    chunks = []; // Wyczyść bufor nagrania po wysłaniu
+                })
+                .catch(error => {
+                    console.error('Error sending recording:', error);
+                });
+            }
+        });
+
+        function sendRecording() {
+            if (chunks.length === 0) {
+                console.error('No recording available to send.');
+                return;
+            }
+
+            const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
+            const formData = new FormData();
+            formData.append('audio_data', blob);
+
+            fetch('/send_recording', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                document.getElementById('result').innerText = data.text; // Wyświetl wynik na stronie internetowej
+                chunks = []; // Wyczyść bufor nagrania po wysłaniu
+            })
+            .catch(error => {
+                console.error('Error sending recording:', error);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+{% extends 'base.html' %}
+
+{% block title %}DMD Panel Administratora - Zarządzanie Blogiem{% endblock %}
+
+{% block addButton %}
+    <li style="margin-left: 15px;">
+        <a  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-plus-square-fill" style="font-size: 18pt; color: rgb(14, 144, 14) !important;"></i></a>
+    </li>
+{% endblock %}
+{% block navbarTitle %}<a class="nav-link active dark-mode " aria-current="page" href="#">Zarządzanie Blogiem</a>{% endblock %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <div style="color: #8bff4d;">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+{% block tableHeader %}
+                        <div class="row">
+                            <div class="klej formatuj-header">
+                                <div class="column-id">
+                                    #
+                                </div>
+                                <div  class="column-expand">
+                                    Tytuł Artykułu
+                                </div>
+                                <div  class="column-usual">
+                                    Kategoria
+                                </div>
+                                <div  class="column-usual">
+                                    Autor
+                                </div>
+                                <div  class="column-usual">
+                                    Data publikacji
+                                </div>
+                                <div  class="column-ender">
+                                    <i class="bi bi-person-gear"></i> Akcja 
+                                </div>
+                            </div>
+                        </div>
+{% endblock %}
+{% block tableContent%}
+                        <!-- OFFCANVANSE RIGHT ADD NEW POST -->
+                        <div class="offcanvas offcanvas-end bg-dark oc-width" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                            <div class="offcanvas-header">
+                                <h4 class="offcanvas-title" id="offcanvasRightLabel">Dodawanie nowego posta</h4>
+                                <button type="button" class="btn-close btn-close-white"  data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <form method="POST" id="editPost_9999999" action="{{ url_for('save_post') }}" enctype="multipart/form-data" >
+                                    <!-- Tytuł artykułu -->
+                                    <div class="mb-3">
+                                    <label for="title_9999999" class="form-label">Tytuł artykułu</label>
+                                    <input 
+                                            type="text" 
+                                            value=""
+                                            class="form-control bg-dark formatuj-maly-font" 
+                                            style="color:#6d6d6d; border:#6a6a6a solid 1px;"
+                                            id="title_9999999" 
+                                            name="title_9999999" 
+                                            required>
+                                    </div>
+
+                                    <!-- Wstęp -->
+                                    <div class="mb-3">
+                                    <label for="introduction_9999999" class="form-label">Wstęp</label>
+                                    <textarea 
+                                            class="form-control bg-dark formatuj-maly-font" 
+                                            style="color:#6d6d6d; border:#6a6a6a solid 1px;"
+                                            id="introduction_9999999" 
+                                            name="introduction_9999999" 
+                                            rows="4" required></textarea>
+                                    </div>
+
+                                    <!-- Highlight -->
+                                    <div class="mb-3">
+                                    <label for="highlight_9999999" class="form-label">Highlight</label>
+                                    <textarea 
+                                            class="form-control bg-dark formatuj-maly-font" 
+                                            style="color:#6d6d6d; border:#6a6a6a solid 1px;"
+                                            id="Highlight_9999999" 
+                                            name="Highlight_9999999" 
+                                            rows="4" required></textarea>
+                                    </div>
+
+                                    <!-- Main Foto -->
+                                    <div class="mb-3">
+                                        <label for="mainFoto_9999999" class="form-label">Main Foto (1920x750)</label>
+                                        <div>
+                                            <img src="" style="max-height: 100px; max-width: 400px; border-radius: 10px; margin-bottom: 10px;" id="mainFotoPreview_9999999" />
+                                        </div>
+                                        <div>
+                                            <input type="file" class="form-control bg-dark formatuj-maly-font" style="color:#6d6d6d;" id="mainFoto_9999999" name="mainFoto_9999999" accept="image/*" onchange="previewImage(this, 'mainFotoPreview_9999999', 1920, 750, 3)">
+                                        </div>
+                                    </div>
+
+                                    <!-- Content Foto -->
+                                    <div class="mb-3">
+                                        <label for="contentFoto_9999999" class="form-label">Content Foto (750x430)</label>
+                                        <div>
+                                            <img src="" style="max-height: 100px; max-width: 400px; border-radius: 10px; margin-bottom: 10px;" id="contentFotoPreview_9999999" />
+                                        </div>  
+                                        <div>
+                                            <input type="file" class="form-control bg-dark formatuj-maly-font" style="color:#6d6d6d;" id="contentFoto_9999999" name="contentFoto_9999999" accept="image/*" onchange="previewImage(this, 'contentFotoPreview_9999999', 750, 430, 3)">
+                                        </div>
+                                    </div>
+
+                                    <!-- Additional List -->
+                                    <div class="mb-3">
+                                        <label for="additionalList9999999" class="form-label">Additional List</label>
+                                        <div id="list-container9999999" class="no-border">
+                                            <!-- Tutaj będą dynamicznie dodawane elementy listy -->
+                                        </div>
+                                        <div class="formatuj-right formatuj-margin">
+                                            <button type="button" class="btn btn-warning btn-sm" onclick="addListItem('9999999')">Dodaj pole</button>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        addListItem('9999999');
+                                    </script>
+
+                                    <!-- Tags -->
+                                    <div class="mb-3">
+                                        <label for="tags9999999" class="form-label">Tags</label>
+                                        <div id="list-tag-container9999999" class="no-border">
+                                            <!-- Tutaj będą dynamicznie dodawane elementy listy -->
+                                        </div>
+                                        <div class="formatuj-right formatuj-margin">
+                                            <button 
+                                                    type="button" 
+                                                    class="btn btn-warning btn-sm" 
+                                                    onclick="addListItem(
+                                                                        '9999999', 
+                                                                        'dynamicTagsField',
+                                                                        'input',
+                                                                        'form-control bg-dark formatuj-maly-font',
+                                                                        'additionalTagList',
+                                                                        '4',
+                                                                        '#6d6d6d',
+                                                                        '#6a6a6a solid 1px',
+                                                                        true,
+                                                                        'no-border formatuj-margin form-control bg-dark formatuj-right',
+                                                                        'list-tag-container',
+                                                                        'btn btn-outline-danger formatuj-maly-font formatuj-margin',
+                                                                        'Usuń tag'
+                                                                        )">
+                                                Dodaj Tag
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        addListItem(
+                                                                        '9999999', 
+                                                                        'dynamicTagsField',
+                                                                        'input',
+                                                                        'form-control bg-dark formatuj-maly-font',
+                                                                        'additionalTagList',
+                                                                        '4',
+                                                                        '#6d6d6d',
+                                                                        '#6a6a6a solid 1px',
+                                                                        true,
+                                                                        'no-border formatuj-margin form-control bg-dark formatuj-right',
+                                                                        'list-tag-container',
+                                                                        'btn btn-outline-danger formatuj-maly-font formatuj-margin',
+                                                                        'Usuń tag'
+                                                                        );
+                                    </script>
+
+                                    <!-- Category -->
+                                    <div class="mb-3">
+                                        <label for="category_9999999" class="form-label">Kategoria</label>
+                                        <input type="text" value="" class="form-control bg-dark formatuj-maly-font" style="color:#6d6d6d; border:#6a6a6a solid 1px;" id="category_9999999" name="category_9999999" required>
+                                    </div>
+                                    <!-- Ukryte pola formularza -->
+                                    <input type="hidden" name="tagsFieldData_9999999" id="tagsFieldData_9999999" />
+                                    <input type="hidden" name="dynamicFieldData_9999999" id="dynamicFieldData_9999999" />
+                                    <input type="hidden" name="UserName_9999999" id="UserName_9999999" value="{{username}}"/>
+                                    <!-- Przycisk Zapisz artykuł -->
+                                    <button type="button" class="btn btn-success btn-sm" style="max-height: 30px; font-size: 12px;" onclick="prepareAndSubmitForm('9999999', false)">Dodaj artykuł</button>
+                                </form>
+                            </div>
+                        </div>
+                        {% for post_data in posts %}
+                            {% set post_id  = post_data['id'] %}
+                        <!-- linia contentu tabeli ciemna-->
+                        <div class="row">
+                            <div class="klej {% if loop.index is even %}formatuj-light-line{% else %}formatuj-dark-line{% endif %}" >
+                                <div class="column-id" data-bs-toggle="collapse" href="#collapse_id_{{post_id}}" role="button" aria-expanded="false" aria-controls="collapse_id_{{post_id}}">
+                                    {{post_id}}
+                                </div>
+                                <div  class="column-expand" data-bs-toggle="collapse" href="#collapse_id_{{post_id}}" role="button" aria-expanded="false" aria-controls="collapse_id_{{post_id}}">
+                                    <a data-bs-toggle="collapse" href="#collapse_id_{{post_id}}" role="button" aria-expanded="false" aria-controls="collapse_id_{{post_id}}">
+                                        {{post_data['title'][:25]}}
+                                    </a>
+                                </div>
+                                <div  class="column-usual" data-bs-toggle="collapse" href="#collapse_id_{{post_id}}" role="button" aria-expanded="false" aria-controls="collapse_id_{{post_id}}">
+                                    <a data-bs-toggle="collapse" href="#collapse_id_{{post_id}}" role="button" aria-expanded="false" aria-controls="collapse_id_{{post_id}}">
+                                        {{post_data['category']}}
+                                    </a>
+                                </div>
+                                <div  class="column-usual" data-bs-toggle="collapse" href="#collapse_id_{{post_id}}" role="button" aria-expanded="false" aria-controls="collapse_id_{{post_id}}">
+                                    <a data-bs-toggle="collapse" href="#collapse_id_{{post_id}}" role="button" aria-expanded="false" aria-controls="collapse_id_{{post_id}}">
+                                        {{post_data['author']}}
+                                    </a>
+                                </div>
+                                <div  class="column-usual" data-bs-toggle="collapse" href="#collapse_id_{{post_id}}" role="button" aria-expanded="false" aria-controls="collapse_id_{{post_id}}">
+                                    <a data-bs-toggle="collapse" href="#collapse_id_{{post_id}}" role="button" aria-expanded="false" aria-controls="collapse_id_{{post_id}}">
+                                        {{post_data['data']}}
+                                    </a>
+                                </div>
+                                <div class="column-ender">
+                                    
+                                    <form id="removePost_{{post_id}}" action="{{ url_for('remove_post') }}" enctype="multipart/form-data" onsubmit="return confirm('Czy na pewno chcesz usunąć post?');">
+                                        {% if userperm['commnets'] == 1 %}
+                                            <a data-bs-toggle="collapse" href="#collapse_id_{{post_id}}" role="button" aria-expanded="false" aria-controls="collapse_id_{{post_id}}"><i class="bi bi-chevron-double-down" style="color: rgb(89, 176, 90) !important;"></i></a>
+                                        {% endif %}
+                                            <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling_{{post_id}}" aria-controls="offcanvasScrolling_{{post_id}}"><i class="bi bi-pencil" style="color: #7eb5cc !important;"></i></a>
+                                        <input type="hidden" name="UserName_{{post_id}}" id="UserName_{{post_id}}" value="{{username}}"/>
+                                        <button type="submit" class="custom-icon-button"><i class="bi bi-trash-fill" style="color: rgb(149, 47, 47) !important;"></i></button>
+                                        <!-- <a href="#"><i class="bi bi-trash-fill" style="color: rgb(149, 47, 47) !important;"></i></a> -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- offcanvanse left -->
+                        <div class="offcanvas offcanvas-start bg-dark oc-width" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling_{{post_id}}" aria-labelledby="offcanvasScrollingLabel">
+                            <div class="offcanvas-header">
+                              <h4 class="offcanvas-title" id="offcanvasScrollingLabel">Edycja Post id: {{post_id}}</h4>
+                              <button type="button" class="btn-close btn-close-white"  data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body formatuj-maly-font">
+                                <div class="tylko-klej">
+                                    <div style="color:#6a6a6a;">
+                                        <form method="POST" id="editPost_{{post_id}}" action="{{ url_for('save_post') }}" enctype="multipart/form-data">
+                                            <!-- Tytuł artykułu -->
+                                            <div class="mb-3">
+                                            <label for="title_{{post_id}}" class="form-label">Tytuł artykułu</label>
+                                            <input 
+                                                    type="text" 
+                                                    value="{{post_data['title']}}"
+                                                    class="form-control bg-dark formatuj-maly-font" 
+                                                    style="color:#6d6d6d; border:#6a6a6a solid 1px;"
+                                                    id="title_{{post_id}}" 
+                                                    name="title_{{post_id}}" 
+                                                    required>
+                                            </div>
+    
+                                            <!-- Wstęp -->
+                                            <div class="mb-3">
+                                            <label for="introduction_{{post_id}}" class="form-label">Wstęp</label>
+                                            <textarea 
+                                                    class="form-control bg-dark formatuj-maly-font" 
+                                                    style="color:#6d6d6d; border:#6a6a6a solid 1px;"
+                                                    id="introduction_{{post_id}}" 
+                                                    name="introduction_{{post_id}}" 
+                                                    rows="4" required>{{post_data['introduction']}}</textarea>
+                                            </div>
+    
+                                            <!-- Highlight -->
+                                            <div class="mb-3">
+                                            <label for="highlight_{{post_id}}" class="form-label">Highlight</label>
+                                            <textarea 
+                                                    class="form-control bg-dark formatuj-maly-font" 
+                                                    style="color:#6d6d6d; border:#6a6a6a solid 1px;"
+                                                    id="Highlight_{{post_id}}" 
+                                                    name="Highlight_{{post_id}}" 
+                                                    rows="4" required>{{post_data['highlight']}}</textarea>
+                                            </div>
+    
+                                            <!-- Main Foto -->
+                                            <div class="mb-3">
+                                                <label for="mainFoto_{{post_id}}" class="form-label">Main Foto (1920x750)</label>
+                                                <div>
+                                                    <img src="{{post_data['mainFoto']}}" style="max-height: 100px; max-width: 400px; border-radius: 10px; margin-bottom: 10px;" id="mainFotoPreview_{{post_id}}" />
+                                                </div>
+                                                <div>
+                                                    <input type="file" class="form-control bg-dark formatuj-maly-font" style="color:#6d6d6d;" id="mainFoto_{{post_id}}" name="mainFoto_{{post_id}}" accept="image/*" onchange="previewImage(this, 'mainFotoPreview_{{post_id}}', 1920, 750, 3)">
+                                                </div>
+                                            </div>
+    
+                                            <!-- Content Foto -->
+                                            <div class="mb-3">
+                                                <label for="contentFoto_{{post_id}}" class="form-label">Content Foto (750x430)</label>
+                                                <div>
+                                                    <img src="{{post_data['contentFoto']}}" style="max-height: 100px; max-width: 400px; border-radius: 10px; margin-bottom: 10px;" id="contentFotoPreview_{{post_id}}" />
+                                                </div>  
+                                                <div>
+                                                    <input type="file" class="form-control bg-dark formatuj-maly-font" style="color:#6d6d6d;" id="contentFoto_{{post_id}}" name="contentFoto_{{post_id}}" accept="image/*" onchange="previewImage(this, 'contentFotoPreview_{{post_id}}', 750, 430, 3)">
+                                                </div>
+                                            </div>
+    
+                                            <!-- Additional List -->
+                                            <div class="mb-3">
+                                                <label for="additionalList{{post_id}}" class="form-label">Additional List</label>
+                                                <div id="list-container{{post_id}}" class="no-border">
+                                                    <!-- Tutaj będą dynamicznie dodawane elementy listy -->
+                                                </div>
+                                                <div class="formatuj-right formatuj-margin">
+                                                    <button type="button" class="btn btn-warning btn-sm" onclick="addListItem('{{post_id}}')">Dodaj pole</button>
+                                                </div>
+                                            </div>
+                                            <script>
+                                                var additionalList = "{{post_data['additionalList']}}";
+                                                var idAddionalList = '{{post_id}}';
+                                                console.log(idAddionalList);
+                                                addListFields(additionalList, idAddionalList, "#splx#");
+                                            </script>
+    
+                                            <!-- Tags -->
+                                            <div class="mb-3">
+                                                <label for="tags{{post_id}}" class="form-label">Tags</label>
+                                                <div id="list-tag-container{{post_id}}" class="no-border">
+                                                    <!-- Tutaj będą dynamicznie dodawane elementy listy -->
+                                                </div>
+                                                <div class="formatuj-right formatuj-margin">
+                                                    <button 
+                                                            type="button" 
+                                                            class="btn btn-warning btn-sm" 
+                                                            onclick="addListItem(
+                                                                                '{{post_id}}', 
+                                                                                'dynamicTagsField',
+                                                                                'input',
+                                                                                'form-control bg-dark formatuj-maly-font',
+                                                                                'additionalTagList',
+                                                                                '4',
+                                                                                '#6d6d6d',
+                                                                                '#6a6a6a solid 1px',
+                                                                                true,
+                                                                                'no-border formatuj-margin form-control bg-dark formatuj-right',
+                                                                                'list-tag-container',
+                                                                                'btn btn-outline-danger formatuj-maly-font formatuj-margin',
+                                                                                'Usuń tag'
+                                                                                )">
+                                                        Dodaj Tag
+                                                    </button>
+                                                </div>
+                                                <!-- <input type="text" value="{{post_data['tags']}}" class="form-control bg-dark formatuj-maly-font" style="color:#6d6d6d; border:#6a6a6a solid 1px;" id="tags" name="tags" required> -->
+                                            </div>
+                                            <script>
+                                                var additionalTagList = "{{post_data['tags']}}";
+                                                var idAddionalTagList = '{{post_id}}';
+                                                addListFields(
+                                                                additionalTagList, 
+                                                                idAddionalTagList, 
+                                                                ", ", 
+                                                                "dynamicTagsField",
+                                                                'input', 
+                                                                "form-control bg-dark formatuj-maly-font",
+                                                                'tags', 
+                                                                '4',
+                                                                "#6d6d6d",
+                                                                "#6a6a6a solid 1px",
+                                                                true,
+                                                                "no-border formatuj-margin form-control bg-dark formatuj-right",
+                                                                "list-tag-container",
+                                                                "btn btn-outline-danger formatuj-maly-font formatuj-margin",
+                                                                "Usuń Tag"
+                                                                );
+                                            </script>
+
+                                            <!-- Category -->
+                                            <div class="mb-3">
+                                                <label for="category_{{post_id}}" class="form-label">Kategoria</label>
+                                                <input type="text" value="{{post_data['category']}}" class="form-control bg-dark formatuj-maly-font" style="color:#6d6d6d; border:#6a6a6a solid 1px;" id="category_{{post_id}}" name="category_{{post_id}}" required>
+                                            </div>
+                                            <!-- Ukryte pola formularza -->
+                                            <input type="hidden" name="tagsFieldData_{{post_id}}" id="tagsFieldData_{{post_id}}" />
+                                            <input type="hidden" name="dynamicFieldData_{{post_id}}" id="dynamicFieldData_{{post_id}}" />
+                                            <input type="hidden" name="UserName_{{post_id}}" id="UserName_{{post_id}}" value="{{username}}"/>
+                                            
+                                            <!-- Przycisk Zapisz artykuł -->
+                                            <button type="button" class="btn btn-success btn-sm" style="max-height: 30px; font-size: 12px;" onclick="prepareAndSubmitForm('{{post_id}}', true)">Zapisz artykuł</button>
+                                            <!-- <button type="submit" class="btn btn-success btn-sm" style="max-height: 30px; font-size: 12px;" onclick="joinListFields('{{post_id}}', ', ', 'dynamicTagsField'); joinListFields('{{post_id}}', '#splx ', 'dynamicField')">Zapisz artykuł</button> -->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <!-- collapse start -->
+                        {% if userperm['commnets'] == 1 %}
+                        <div class="sub-panel podswietlaj rogi collapse formatyj-maly-wiersz" id="collapse_id_{{post_id}}">
+                            {% for comment in post_data['comments'].values() %}
+                            <div class="tylko-klej">
+                                <div class="colapse-column-expand-mini formatuj-max-height">
+                                    {{comment['message']}}
+                                </div>
+                                <div class="colapse-column-usual-mini formatuj-max-height">
+                                    {{comment['user']}}
+                                </div>
+                                <div class="colapse-column-usual-mini formatuj-max-height">
+                                    {{comment['e-mail']}}
+                                </div>
+                                <div class="colapse-column-usual-mini formatuj-max-height">
+                                    {{comment['data-time']}}
+                                </div>
+                                <div  class="colapse-column-ender-mini">
+                                    <form id="removeComment_{{post_id}}" action="{{ url_for('remove_comment') }}" enctype="multipart/form-data" onsubmit="return confirm('Czy na pewno chcesz usunąć komentarz?');">
+                                        <input type="hidden" name="UserName_{{post_id}}" id="UserName_{{post_id}}" value="{{username}}"/>
+                                        <button type="submit" class="custom-icon-button"><i class="bi bi-trash" style="color: rgb(205, 93, 93) !important;"></i></button>
+                                    </form>
+                                    <!-- <a href="#"><i class="bi bi-person-video2" style="color: rgb(193, 156, 156) !important;"></i></a> -->
+                                    <!-- <a href="#"><i class="bi bi-trash" style="color: rgb(205, 93, 93) !important;"></i></a> -->
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <!-- collapse end -->
+                        {% endfor %}
+                        <!-- Paginacja -->
+                        <span class="formatuj-maly-logout">{{ pagination.info }}</span>
+                        <div class="pagination formatuj-margin-top">
+                            <nav aria-label="Page navigation example">                            
+                                <ul class="pagination justify-content-center dark-mode">
+                                    <li class="page-item">{{ pagination.prev }}</li>
+                                    <li class="page-item">{{ pagination.links }}</li>
+                                    <li class="page-item">{{ pagination.next }}</li>
+                                </ul>
+                            </nav>
+                        </div>
+{% endblock %}
+
+
+{% block footer %}
+ To jest stopka panelu administracyjnego. All right reserved &copy; 2024 by DMD Panel Administratora.<br/>
+{% endblock %}

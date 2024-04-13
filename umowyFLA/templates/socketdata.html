@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voice Data</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js" integrity="sha384-rdDfhNipQU3WxSboe9TPF8v8pbxCSsw8xI81BONq5CQj18MxBGdE3QunvVpGo2NI" crossorigin="anonymous"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        function sendVoiceData(data) {
+            socket.emit('voice_data', { text: data });
+        }
+
+        socket.on('voice_response', function(data) {
+            console.log('Received response:', data);
+        });
+    </script>
+</head>
+<body>
+    <!-- Tutaj możesz dodać interfejs użytkownika, np. przycisk do rozpoczęcia nagrywania głosu -->
+</body>
+</html>

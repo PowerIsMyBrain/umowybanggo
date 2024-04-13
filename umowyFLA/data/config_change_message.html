@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Rejestracja w DMD Newsletter</title>
+    <style>
+        /* Dodaj stylizację, dostosowaną do Twoich potrzeb */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        .footer {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #58506b;
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: aliceblue;
+        }
+
+        .footer a {
+            color: aliceblue;
+            text-decoration: none;
+        }
+
+        .footer img {
+            padding-bottom: 5px;
+            max-width: 200px;
+            max-height: 100px;
+        }
+
+        .display-4 {
+            font-size: 1.5rem;
+            color: white; 
+        }
+    </style>
+</head>
+<body>
+    <p>
+        Witaj, {{imie klienta}}. <br />
+        Zostałeś zarejestrowany do newslettera DMD. 
+        Prosimy o potwierdzenie swojej rejestracji klikając w poniższy link.
+    </p>
+    <a href="https://dmddomy.pl/aktywacja-newslettera/{{hashes}}" target="_blank">Potwierdź rejestrację.</a><br/>
+    <footer class="footer">
+        <img src="https://dmddomy.pl/images/images/logo_dmd_apl.png" alt="DMD" />
+        <p>© 2024 DMD Newsletter. Wszelkie prawa zastrzeżone.</p>
+        <a href="https://dmddomy.pl" target="_blank">www.dmddomy.pl</a> 
+        <!-- | 
+        <a href="http://dmdbudownictwo.pl" target="_blank">www.dmdbudownictwo.pl</a> | 
+        <a href="http://dmdelitehome.pl" target="_blank">www.dmdelitehome.pl</a> | 
+        <a href="http://dmdinvestment.pl" target="_blank">www.dmdinvestment.pl</a> -->
+        <p>
+            <a href="https://dmddomy.pl/edytuj-newslettera/{{hashes}}" target="_blank"><i class="bi bi-person-lines-fill"></i>&nbsp; &nbsp; &nbsp;Edytuj profil subskrybenta DMD.</a><br/>
+            <a href="https://dmddomy.pl/usun-newslettera/{{hashes}}" target="_blank"><i class="bi bi-trash3"></i>&nbsp; &nbsp; &nbsp;Usuń z newslettera DMD.</a>
+        </p>
+        <p>Obserwuj nas na:</p>
+        <p>
+            <a href="https://www.facebook.com/dmddomy/" target="_blank"><i class="bi bi-facebook display-4"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="https://www.youtube.com/channel/UCBRN-SPMEIYK6YRV23Komxw" target="_blank"><i class="bi bi-youtube display-4"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="https://www.instagram.com/dmddomy/" target="_blank"><i class="bi bi-instagram display-4"></i></a>
+        </p>
+        
+    </footer>
+</body>
+</html>
