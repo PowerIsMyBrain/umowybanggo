@@ -60,29 +60,29 @@
                 sendButton.disabled = false; // Po zakończeniu nagrywania aktywujemy ponownie przycisk "Wyślij nagranie"
             }
 
-            function sendRecording() {
-                if (chunks.length === 0) {
-                    console.error('No recording available to send.');
-                    return;
-                }
+            // function sendRecording() {
+            //     if (chunks.length === 0) {
+            //         console.error('No recording available to send.');
+            //         return;
+            //     }
 
-                const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
-                const formData = new FormData();
-                formData.append('audio_data', blob);
+            //     const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
+            //     const formData = new FormData();
+            //     formData.append('audio_data', blob);
 
-                fetch('/send_recording', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.text())
-                .then(data => {
-                    console.log(data);
-                    chunks = []; // Wyczyść bufor nagrania po wysłaniu
-                })
-                .catch(error => {
-                    console.error('Error sending recording:', error);
-                });
-            }
+            //     fetch('/send_recording', {
+            //         method: 'POST',
+            //         body: formData
+            //     })
+            //     .then(response => response.text())
+            //     .then(data => {
+            //         console.log(data);
+            //         chunks = []; // Wyczyść bufor nagrania po wysłaniu
+            //     })
+            //     .catch(error => {
+            //         console.error('Error sending recording:', error);
+            //     });
+            // }
         });
 
         function sendRecording() {
@@ -102,7 +102,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                document.getElementById('result').innerText = data.text; // Wyświetl wynik na stronie internetowej
+                document.getElementById('result').innerText = data.recognized_texts; // Wyświetl wynik na stronie internetowej
                 chunks = []; // Wyczyść bufor nagrania po wysłaniu
             })
             .catch(error => {
