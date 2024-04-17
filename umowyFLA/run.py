@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request
-
 import speech_recognition as sr
 from flask import jsonify
-
 import soundfile as sf
+from wzoruumow import data as dataWzoruUmow
+import find_contracts_by_phrase
+# import pdf_exporter
 
 app = Flask(__name__)
 
@@ -46,11 +47,22 @@ def send_recording():
     try:
         rcog = recognizer.recognize_google(audio, language='pl-PL')
         # Tutaj serce programu 
+
         text = str(rcog).lower().replace(' kropka', '.')\
             .replace(' kropka ', '. ').replace(' przecinek ', ', ')\
             .replace(' wykrzyknik ', '! ').replace(' wykrzyknik', '!')\
             .replace(' znak zapytania ', '? ').replace(' znak zapytania', '?')
-            
+        """
+        from wzoruumow import data as dataWzoruUmow
+        import find_contracts_by_phrase
+        import pdf_exporter
+        """
+        
+
+        kindList = find_contracts_by_phrase.find_contracts_by_phrase(dataWzoruUmow,  text)
+        text = str(kindList)
+        # thisOne = kindList[0]
+        # pdf_exporter.generate_contract_pdf(dataWzoruUmow[thisOne])
         if text.count('umowa o dzielo') > 0:
             found = True
             text = text + """
