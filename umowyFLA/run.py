@@ -60,16 +60,21 @@ def send_recording():
         
 
         kindList = find_contracts_by_phrase.find_contracts_by_phrase(dataWzoruUmow,  text)
-        text = str(kindList)
+        if len(kindList):
+            text = kindList[0]
+        else:
+            answer = "Nie znaleziono umowy pasującej do wypowiedzi."
+            print(answer)
+            text = answer
         # thisOne = kindList[0]
         # pdf_exporter.generate_contract_pdf(dataWzoruUmow[thisOne])
-        if text.count('umowa o dzielo') > 0:
-            found = True
-            text = text + """
+        # if text.count('umowa o dzielo') > 0:
+        #     found = True
+        #     text = text + """
 
             
-            Znaleziono umowę o dzieło!
-            """
+        #     Znaleziono umowę o dzieło!
+        #     """
         
         print('text ok')
     except sr.UnknownValueError:
