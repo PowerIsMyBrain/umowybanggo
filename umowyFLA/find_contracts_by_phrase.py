@@ -1,3 +1,17 @@
+def rekurencyjna_petla_w_slowniku(valData, phrase):
+    phrase_lower = phrase.lower()
+    if isinstance(valData, dict):
+        for key, val in valData.items():
+            # Sprawdzamy rekurencyjnie zarówno klucze jak i wartości
+            if phrase_lower in key.lower() or rekurencyjna_petla_w_slowniku(val, phrase):
+                return True
+        return False  # Zwracamy False tylko gdy przeszukamy wszystkie elementy i nie znajdziemy frazy
+    elif isinstance(valData, str):
+        return phrase_lower in valData.lower()
+    return False
+
+
+
 def find_contracts_by_phrase(data, phrase):
     matching_keys = []
     phrase_lower = phrase.lower()  # Przetwarzanie frazy na małe litery, aby wyszukiwanie było niezależne od wielkości liter
@@ -11,10 +25,7 @@ def find_contracts_by_phrase(data, phrase):
 
         # Sprawdzanie, czy fraza znajduje się w treści poszczególnych paragrafów
         for paragraf in content.values():
-            print(paragraf)
-            try: par = str(paragraf).lower()
-            except: par = ''
-            if phrase_lower in par or phrase_lower in par:
+            if rekurencyjna_petla_w_slowniku(paragraf, phrase_lower):
                 matching_keys.append(key)
                 break  # Przerywa pętlę po znalezieniu pierwszego pasującego paragrafu w danej umowie
 
@@ -49,3 +60,6 @@ if __name__ == "__main__":
     search_phrase = "podstawowe"
     found_contracts = find_contracts_by_phrase(contracts_data, search_phrase)
     print(found_contracts)
+
+    print(rekurencyjna_petla_w_slowniku(contracts_data, search_phrase))  # Zwróci True
+    print(rekurencyjna_petla_w_slowniku(contracts_data, "nic"))  # Zwróci False
