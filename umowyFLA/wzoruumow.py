@@ -10,7 +10,7 @@ contracts_data = {
             "paragrafy": [
                 {
                     "tytul": "§1 Definicje",
-                    "tresc": "1. W niniejszej umowie terminy użyte wielką literą mają znaczenie określone w Kodeksie Cywilnym, chyba że treść umowy stanowi inaczej.\n2. Zleceniodawca - osoba fizyczna/juridyczna, która zleca wykonanie dzieła.\n3. Wykonawca - osoba fizyczna/juridyczna, która podejmuje się wykonania dzieła na rzecz Zleceniodawcy."
+                    "tresc": "1. W niniejszej umowie terminy użyte wielką literą mają znaczenie określone w Kodeksie Cywilnym, chyba że tresc umowy stanowi inaczej.\n2. Zleceniodawca - osoba fizyczna/juridyczna, która zleca wykonanie dzieła.\n3. Wykonawca - osoba fizyczna/juridyczna, która podejmuje się wykonania dzieła na rzecz Zleceniodawcy."
                 },
                 {
                     "tytul": "§2 Przedmiot umowy",
@@ -39,7 +39,7 @@ contracts_data = {
             ]
         },
 
-    "Umowa o dzieło": {
+    "Umowa zlecenie": {
         "data_umowy": "2024-04-17",
         "miejsce_umowy": "Warszawa",
         "strony_umowy": {
@@ -49,11 +49,11 @@ contracts_data = {
         "paragrafy": [
             {
                 "tytul": "§1 Definicje",
-                "tresc": "1. W niniejszej umowie terminy użyte wielką literą mają znaczenie określone w Kodeksie Cywilnym, chyba że treść umowy stanowi inaczej.\n2. Zleceniodawca - osoba fizyczna/juridyczna, która zleca wykonanie dzieła.\n3. Wykonawca - osoba fizyczna/juridyczna, która podejmuje się wykonania dzieła na rzecz Zleceniodawcy."
+                "tresc": "1. W niniejszej umowie terminy użyte wielką literą mają znaczenie określone w Kodeksie Cywilnym, chyba że tresc umowy stanowi inaczej.\n2. Zleceniodawca - osoba fizyczna/juridyczna, która zleca wykonanie dzieła.\n3. Wykonawca - osoba fizyczna/juridyczna, która podejmuje się wykonania dzieła na rzecz Zleceniodawcy."
             },
             {
                 "tytul": "§2 Przedmiot umowy",
-                "tresc": "1. Przedmiotem niniejszej umowy jest wykonanie dzieła, określonego w załączniku nr X do niniejszej umowy.\n2. Dzieło ma być wykonane zgodnie z obowiązującymi przepisami prawa oraz zgodnie z zasadami rzetelności i staranności.\n3. Wykonawca oświadcza, że posiada niezbędne kwalifikacje oraz doświadczenie do wykonania dzieła."
+                "tresc": "1. Przedmiotem niniejszej umowy jest wykonanie dzieła, określonego w załączniku nr X do niniejszej umowy.\n2. Zlecenie ma być wykonane zgodnie z obowiązującymi przepisami prawa oraz zgodnie z zasadami rzetelności i staranności.\n3. Wykonawca oświadcza, że posiada niezbędne kwalifikacje oraz doświadczenie do wykonania dzieła."
             },
             {
                 "tytul": "§3 Wynagrodzenie",
@@ -85,12 +85,32 @@ contracts_data = {
             "pożyczkodawca": "Imię i nazwisko Pożyczkodawcy",
             "pożyczkobiorca": "Imię i nazwisko Pożyczkobiorcy"
         },
-        "przedmiot_umowy": "Przedmiotem umowy jest udzielenie pożyczki przez Pożyczkodawcę na rzecz Pożyczkobiorcy w celu określonym w umowie.",
-        "kwota_pożyczki": "Kwota pożyczki wynosi X złotych.",
-        "oprocentowanie": "Oprocentowanie pożyczki wynosi X% w skali roku.",
-        "termin_spłaty": "Pożyczka zostanie spłacona przez Pożyczkobiorcę najpóźniej do dnia X.",
-        "sposób_spłaty": "Spłata pożyczki nastąpi w ratach miesięcznych/w jednej racie na koniec okresu pożyczki, chyba że strony ustalą inaczej.",
-        "zabezpieczenie": "Umowa jest zabezpieczona/X nie jest zabezpieczona."
+        "paragrafy": [
+            {
+                "tytul": "§1 Przedmiot umowy",
+                "tresc": "Przedmiotem umowy jest udzielenie pożyczki przez Pożyczkodawcę na rzecz Pożyczkobiorcy w celu określonym w umowie."
+            },
+            {
+                "tytul": "§2 Kwota pożyczki",
+                "tresc": "Kwota pożyczki wynosi X złotych."
+            },
+            {
+                "tytul": "§3 Oprocentowanie",
+                "tresc": "Oprocentowanie pożyczki wynosi X% w skali roku."
+            },
+            {
+                "tytul": "§4 Termin spłaty",
+                "tresc": "Pożyczka zostanie spłacona przez Pożyczkobiorcę najpóźniej do dnia X."
+            },
+            {
+                "tytul": "§5 Sposób spłaty",
+                "tresc": "Spłata pożyczki nastąpi w ratach miesięcznych/w jednej racie na koniec okresu pożyczki, chyba że strony ustalą inaczej."
+            },
+            {
+                "tytul": "§6 Zabezpieczenie",
+                "tresc": "Umowa jest zabezpieczona/X nie jest zabezpieczona."
+            }
+        ]
     },
 
     "Umowa współpracy": {
@@ -100,51 +120,37 @@ contracts_data = {
             "strona_pierwsza": "Nazwa i dane strony pierwszej",
             "strona_druga": "Nazwa i dane strony drugiej"
         },
-        "przedmiot_umowy": "Przedmiotem umowy jest współpraca pomiędzy Stroną Pierwszą a Stroną Drugą w celu osiągnięcia określonych celów biznesowych.",
-        "zakres_współpracy": "Zakres współpracy obejmuje m.in. wymianę informacji, świadczenie usług, wspólne projekty, promocję produktów lub usług.",
-        "obowiązki_strony_pierwszej": [
-            "Określenie konkretnych działań lub świadczeń podejmowanych przez Stronę Pierwszą.",
-            "Terminy realizacji poszczególnych działań."
-        ],
-        "obowiązki_strony_drugiej": [
-            "Określenie konkretnych działań lub świadczeń podejmowanych przez Stronę Drugą.",
-            "Terminy realizacji poszczególnych działań."
-        ],
-        "warunki_finansowe": {
-            "forma_płatności": "Określenie sposobu i terminów płatności za świadczone usługi lub produkty.",
-            "rozliczenia": "Sposób rozliczania się pomiędzy Stronami, w tym ustalenie ewentualnych zaliczek, faktur, etc."
-        },
-        "zasady_wypowiedzenia_umowy": "Umowa może być wypowiedziana przez każdą Stronę z zachowaniem określonego terminu w formie pisemnej.",
-        "postanowienia_końcowe": [
-            "Rozstrzyganie sporów - w przypadku sporów Strony zobowiązują się do próby rozwiązania ich drogą negocjacji.",
-            "Prawo właściwe - Umowa podlega prawu polskiemu.",
-            "Zmiany w umowie - Wszelkie zmiany w Umowie wymagają formy pisemnej pod rygorem nieważności."
-        ]
-    },
-    "Umowa pożyczki z zabezpieczeniem hipotecznym": {
-        "data_umowy": "2024-04-17",
-        "miejsce_umowy": "Warszawa",
-        "strony_umowy": {
-            "pożyczkodawca": "Imię i nazwisko Pożyczkodawcy",
-            "pożyczkobiorca": "Imię i nazwisko Pożyczkobiorcy"
-        },
-        "kwota_pożyczki": "Kwota pożyczki wynosi X złotych.",
-        "oprocentowanie": "Oprocentowanie pożyczki wynosi X% w skali roku.",
-        "termin_spłaty": "Pożyczka zostanie spłacona przez Pożyczkobiorcę najpóźniej do dnia X.",
-        "sposób_spłaty": "Spłata pożyczki nastąpi w ratach miesięcznych/w jednej racie na koniec okresu pożyczki, chyba że strony ustalą inaczej.",
-        "zabezpieczenie": {
-            "rodzaj": "Hipoteka",
-            "nieruchomość": {
-                "adres": "Adres nieruchomości podzastawianej",
-                "opis": "Szczegółowy opis nieruchomości, jej powierzchnia, informacje o księdze wieczystej, etc."
+        "paragrafy": [
+            {
+                "tytul": "§1 Przedmiot umowy",
+                "tresc": "Przedmiotem umowy jest współpraca pomiędzy Stroną Pierwszą a Stroną Drugą w celu osiągnięcia określonych celów biznesowych."
+            },
+            {
+                "tytul": "§2 Zakres współpracy",
+                "tresc": "Zakres współpracy obejmuje m.in. wymianę informacji, świadczenie usług, wspólne projekty, promocję produktów lub usług."
+            },
+            {
+                "tytul": "§3 Obowiązki strony pierwszej",
+                "tresc": "Określenie konkretnych działań lub świadczeń podejmowanych przez Stronę Drugą. Terminy realizacji poszczególnych działań."
+            },
+            {
+                "tytul": "§4 Obowiązki strony drugiej",
+                "tresc": "Określenie konkretnych działań lub świadczeń podejmowanych przez Stronę Pierwszą. Terminy realizacji poszczególnych działań."
+            },
+            {
+                "tytul": "§5 Warunki finansowe",
+                "tresc": "Określenie sposobu i terminów płatności za świadczone usługi lub produkty. Sposób rozliczania się pomiędzy Stronami, w tym ustalenie ewentualnych zaliczek, faktur, etc."
+            },
+            {
+                "tytul": "§6 Zasady wypowiedzenia umowy",
+                "tresc": "Umowa może być wypowiedziana przez każdą Stronę z zachowaniem określonego terminu w formie pisemnej."
+            },
+            {
+                "tytul": "§7 Postanowienia końcowe",
+                "tresc": "Rozstrzyganie sporów - w przypadku sporów Strony zobowiązują się do próby rozwiązania ich drogą negocjacji. Prawo właściwe - Umowa podlega prawu polskiemu. Zmiany w umowie - Wszelkie zmiany w Umowie wymagają formy pisemnej pod rygorem nieważności."
             }
-        },
-        "postanowienia_końcowe": [
-            "Wszelkie zmiany w Umowie wymagają formy pisemnej pod rygorem nieważności.",
-            "Umowa wchodzi w życie z chwilą podpisania przez obie Strony."
-        ]
-    }
-
+            ]
+        }
 
     }
 data = contracts_data

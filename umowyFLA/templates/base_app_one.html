@@ -60,30 +60,21 @@
                 sendButton.disabled = false; // Po zakończeniu nagrywania aktywujemy ponownie przycisk "Wyślij nagranie"
             }
 
-            // function sendRecording() {
-            //     if (chunks.length === 0) {
-            //         console.error('No recording available to send.');
-            //         return;
-            //     }
 
-            //     const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
-            //     const formData = new FormData();
-            //     formData.append('audio_data', blob);
-
-            //     fetch('/send_recording', {
-            //         method: 'POST',
-            //         body: formData
-            //     })
-            //     .then(response => response.text())
-            //     .then(data => {
-            //         console.log(data);
-            //         chunks = []; // Wyczyść bufor nagrania po wysłaniu
-            //     })
-            //     .catch(error => {
-            //         console.error('Error sending recording:', error);
-            //     });
-            // }
         });
+
+
+        function download(filename) {
+            const element = document.createElement('a');
+            // Bezpośrednie wskazanie pliku w katalogu głównym aplikacji (przy założeniu, że serwer pozwala na to)
+            element.setAttribute('href', `/${filename}`);
+            element.setAttribute('download', filename);
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+
 
         function sendRecording() {
             if (chunks.length === 0) {
@@ -104,11 +95,15 @@
                 console.log(data);
                 document.getElementById('result').innerText = data.recognized_texts; // Wyświetl wynik na stronie internetowej
                 chunks = []; // Wyczyść bufor nagrania po wysłaniu
+                if (data.success) {
+                    console.log(window.location.pathname);
+                    download('umowa.pdf');
+                };
             })
             .catch(error => {
                 console.error('Error sending recording:', error);
             });
-        }
+        };
     </script>
 </body>
 </html>
