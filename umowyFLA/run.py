@@ -38,24 +38,31 @@ def index():
 def voice():
     return render_template("base_app_one.html")
 
+@app.route('/send_dev', methods=['POST'])
+def send_dev():
+    dev_text = request.form['dev_text']
+    print(dev_text)
+
+    split_dev_text = dev_text.lower().split(' ')
+    umowy_set = set()
+    for word in split_dev_text:
+        kindList = find_contracts_by_phrase.find_contracts_by_phrase(
+            dataWzoruUmow, word)
+        for umowa in kindList:
+            umowy_set.add(umowa)
+
+        thisOne = kindList[0]
+    
+    # pdf_1____.generate_contract_pdf(dataWzoruUmow[thisOne])
+    success = True
+
+    print('text ok')
+    return jsonify({'recognized_texts': f'{umowy_set}', 'success':False })
+
 
 @app.route('/send_recording', methods=['POST'])
 def send_recording():
-    # Odbierz nagranie dźwiękowe przesłane z przeglądarki
-    audio_data = request.files['audio_data']
-    
-    # # Zapisz nagranie dźwiękowe do pliku
-    # audio_path = 'received_recording.ogg'
-    # audio_data.save(audio_path)
 
-
-    # # Amn Tree
-    # # Wczytaj plik OGG
-    # ogg_data, samplerate = sf.read(audio_path)
-
-    # # Zapisz jako plik WAV
-    # sf.write('received_recording.wav', ogg_data, samplerate)
-    # Ścieżki do plików
     input_ogg_path = 'received_recording.ogg'
     output_wav_path = 'received_recording.wav'
 
@@ -82,7 +89,6 @@ def send_recording():
         import find_contracts_by_phrase
         import pdf_exporter
         """
-        
 
         kindList = find_contracts_by_phrase.find_contracts_by_phrase(dataWzoruUmow,  text)
         if len(kindList) > 0:

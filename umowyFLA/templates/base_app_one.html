@@ -18,6 +18,12 @@
 
         <audio id="audioElement" controls></audio>
     </div>
+    <div>
+        <form action="/send_dev" method="post" onsubmit="return false;">
+            <input type="text" name="dev_text" value="" id="dev_text_input" />
+            <button type="submit" onclick="sendDevText()">Wyślij text</button>
+        </form>
+    </div>
     <script src="static/app_one/js/script.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -104,6 +110,29 @@
                 console.error('Error sending recording:', error);
             });
         };
+
+        function sendDevText() {
+            const textValue = document.getElementById('dev_text_input').value;
+            const formData = new FormData();
+            formData.append('dev_text', textValue);
+
+            fetch('/send_dev', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = data.recognized_texts; // Wyświetl wynik na stronie internetowej
+                console.log('Server response:', data);
+                if (data.success) {
+                    console.log(window.location.pathname);
+                    download('umowa.pdf');
+                };
+            })
+            .catch(error => {
+                console.error('Error sending text:', error);
+            });
+        }
     </script>
 </body>
 </html>
