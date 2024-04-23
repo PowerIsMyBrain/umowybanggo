@@ -5,8 +5,10 @@ import soundfile as sf
 from wzoruumow import data as dataWzoruUmow
 import find_contracts_by_phrase
 import pdf_exporter_1 as pdf_1____
+import AiRandsChoice_class as AiRand
 
 app = Flask(__name__)
+aiRand = AiRand.AiRandsChoice()
 
 
 @app.route('/<filename>')
@@ -45,19 +47,28 @@ def send_dev():
 
     split_dev_text = dev_text.lower().split(' ')
     umowy_set = set()
+    found_dict = {}
     for word in split_dev_text:
-        kindList = find_contracts_by_phrase.find_contracts_by_phrase(
+        kindList = find_contracts_by_phrase.find_contracts_by_keyWords(
             dataWzoruUmow, word)
+        print(word, kindList)
         for umowa in kindList:
             umowy_set.add(umowa)
+            try:
+                found_dict[umowa] += 1
+            except KeyError:
+                found_dict[umowa] = 1
+    choiced_contract = aiRand.weighted_choice(
+        [a for a in found_dict.keys()], [a for a in found_dict.values()])
 
-        thisOne = kindList[0]
-    
-    # pdf_1____.generate_contract_pdf(dataWzoruUmow[thisOne])
+
+    print(found_dict)
+    print(choiced_contract)
+    pdf_1____.generate_contract_pdf(dataWzoruUmow[choiced_contract])
     success = True
 
     print('text ok')
-    return jsonify({'recognized_texts': f'{umowy_set}', 'success':False })
+    return jsonify({'recognized_texts': f'{umowy_set}', 'success':success })
 
 
 @app.route('/send_recording', methods=['POST'])
@@ -75,7 +86,7 @@ def send_recording():
 
     with sr.AudioFile('received_recording.wav') as source:
         audio = recognizer.record(source)
-    found = False
+    found_dict = {}
     try:
         rcog = recognizer.recognize_google(audio, language='pl-PL')
         # Tutaj serce programu 
@@ -91,7 +102,9 @@ def send_recording():
         """
 
         kindList = find_contracts_by_phrase.find_contracts_by_phrase(dataWzoruUmow,  text)
+
         if len(kindList) > 0:
+            rand_item = aiRand.weighted_choice(kindList, [1 for _ in  range(len(kindList))])
             text = kindList[0]
         else:
             answer = "Nie znaleziono umowy pasującej do wypowiedzi."

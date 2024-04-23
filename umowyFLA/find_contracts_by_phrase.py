@@ -33,6 +33,22 @@ def find_contracts_by_phrase(data, phrase):
 
     return matching_keys
 
+def find_contracts_by_keyWords(keyWordsData_dict, phrase):
+    matching_keys = []
+    phrase_lower = str(phrase).lower()
+
+    # Przeszukiwanie każdego klucza i wartości w danych
+    for key, content in keyWordsData_dict.items():
+        if phrase_lower in str(key).lower():
+            matching_keys.append(key)
+
+        for search in content['search']:
+            if rekurencyjna_petla_w_slowniku(search, phrase_lower):
+                matching_keys.append(key)
+                break
+
+    return matching_keys
+
 
 if __name__ == "__main__":
     # Przykładowa baza danych (słownik)
