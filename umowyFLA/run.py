@@ -100,30 +100,44 @@ def send_recording():
         import find_contracts_by_phrase
         import pdf_exporter
         """
-
-        kindList = find_contracts_by_phrase.find_contracts_by_phrase(dataWzoruUmow,  text)
-
-        if len(kindList) > 0:
-            rand_item = aiRand.weighted_choice(kindList, [1 for _ in  range(len(kindList))])
-            text = kindList[0]
+        split_dev_text = rcog.lower().split(' ')
+        umowy_set = set()
+        found_dict = {}
+        
+        for word in split_dev_text:
+            kindList = find_contracts_by_phrase.find_contracts_by_keyWords(
+                dataWzoruUmow, word)
+            # print(word, kindList)
+            for umowa in kindList:
+                umowy_set.add(umowa)
+                try:
+                    found_dict[umowa] += 3
+                except KeyError:
+                    found_dict[umowa] = 1
+        if len([a for a in found_dict.keys()]) != 0:
+            choiced_contract = aiRand.weighted_choice(
+                [a for a in found_dict.keys()], [a for a in found_dict.values()])
+            success = False
         else:
-            answer = "Nie znaleziono umowy pasującej do wypowiedzi."
-            print(answer)
-            text = answer
-        thisOne = kindList[0]
-        pdf_1____.generate_contract_pdf(dataWzoruUmow[thisOne])
+            choiced_contract = "Nie znaleziono umowy pasującej do wypowiedzi."
+            success = False
+
+
+        print(found_dict)
+        print(choiced_contract)
+        pdf_1____.generate_contract_pdf(dataWzoruUmow[choiced_contract])
         success = True
 
         print('text ok')
     except sr.UnknownValueError:
-        text = "Nie można rozpoznać mowy"
+        choiced_contract = "Nie można rozpoznać mowy"
         success = False
 
     except sr.RequestError as e:
-        text = f"Błąd serwera: {e}"
+        choiced_contract = f"Błąd serwera: {e}"
         success = False
     # Przekazanie wyników rozpoznawania mowy do strony internetowej za pomocą JSON
-    return jsonify({'recognized_texts': text, 'success':success })
+    return jsonify({'recognized_texts': choiced_contract, 'success':success })
 
 
 if __name__ == '__main__':
