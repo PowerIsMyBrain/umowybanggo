@@ -46,6 +46,7 @@ def find_contracts_by_keyWords(keyWordsData_dict, phrase):
             # print(key_s, val_s)
             if key_s == 'search':
                 if phrase_lower in val_s:
+                    print(phrase_lower, val_s)
                     matching_keys.append(key)
 
     print(matching_keys)

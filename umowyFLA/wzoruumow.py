@@ -130,7 +130,8 @@ contracts_data = {
             "umowy",
             "przeniesienie",
             "płatności",
-            "warunki"
+            "warunki",
+            "śmieciowa", "śmieciówa"
         ]
     },
 

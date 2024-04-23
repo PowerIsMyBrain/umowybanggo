@@ -51,11 +51,11 @@ def send_dev():
     for word in split_dev_text:
         kindList = find_contracts_by_phrase.find_contracts_by_keyWords(
             dataWzoruUmow, word)
-        print(word, kindList)
+        # print(word, kindList)
         for umowa in kindList:
             umowy_set.add(umowa)
             try:
-                found_dict[umowa] += 1
+                found_dict[umowa] += 3
             except KeyError:
                 found_dict[umowa] = 1
     choiced_contract = aiRand.weighted_choice(
@@ -68,7 +68,7 @@ def send_dev():
     success = True
 
     print('text ok')
-    return jsonify({'recognized_texts': f'{umowy_set}', 'success':success })
+    return jsonify({'recognized_texts': f'{choiced_contract}', 'success':success })
 
 
 @app.route('/send_recording', methods=['POST'])
