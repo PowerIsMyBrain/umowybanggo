@@ -41,12 +41,14 @@ def find_contracts_by_keyWords(keyWordsData_dict, phrase):
     for key, content in keyWordsData_dict.items():
         if phrase_lower in str(key).lower():
             matching_keys.append(key)
+        # print(content)
+        for key_s, val_s in content.items():
+            # print(key_s, val_s)
+            if key_s == 'search':
+                if phrase_lower in val_s:
+                    matching_keys.append(key)
 
-        for search in content['search']:
-            if rekurencyjna_petla_w_slowniku(search, phrase_lower):
-                matching_keys.append(key)
-                break
-
+    print(matching_keys)
     return matching_keys
 
 

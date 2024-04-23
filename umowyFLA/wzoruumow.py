@@ -431,7 +431,8 @@ contracts_data = {
             "regulacyjna",
             "regulacyjne",
             "regulacyjnego",
-            "regulacyjnej"
+            "regulacyjnej",
+            "chajs", 'pitos', 'szmal', 'pozyczka', 'pieniądze'
         ]
     },
 
